@@ -1,12 +1,10 @@
 <template>
-    <div class="border-2 border-gray-800 bg-gray-700 grid grid-cols-4 gap-2 p-2">
-        <div id="display"
-            class="h-16 col-span-full bg-gray-300 flex justify-end items-center p-2 text-3xl font-semibold">
+    <div class="calculator-container">
+        <div id="display" class="calculator-display">
             {{ display }}
         </div>
-        <button v-for="button in buttons" :key="button.id" :id="button.id" @click="
-            button.callback ? button.callback() : (display += button.value)
-            " :class="`h-16 text-2xl bg-gray-300 ${button.class}`">
+        <button v-for="button in buttons" :key="button.id" :id="button.id" class="calculator-button"
+            :style="button.styles ?? {}" @click="button.callback ? button.callback() : (display += button.value)">
             {{ button.value }}
         </button>
     </div>
@@ -31,31 +29,64 @@ const buttons = [
     {
         id: "clear",
         value: "AC",
-        class: "!bg-red-500",
+        styles: { backgroundColor: "red" },
         callback: clearCallback,
     },
-    { id: "open-paren", value: "(", class: "!bg-gray-400" },
-    { id: "close-paren", value: ")", class: "!bg-gray-400" },
-    { id: "divide", value: "/", class: "!bg-gray-400" },
-    { id: "seven", value: "7", class: "" },
-    { id: "eight", value: "8", class: "" },
-    { id: "nine", value: "9", class: "" },
-    { id: "multiply", value: "*", class: "!bg-gray-400" },
-    { id: "four", value: "4", class: "" },
-    { id: "five", value: "5", class: "" },
-    { id: "six", value: "6", class: "" },
-    { id: "subtract", value: "-", class: "!bg-gray-400" },
-    { id: "one", value: "1", class: "" },
-    { id: "two", value: "2", class: "" },
-    { id: "three", value: "3", class: "" },
-    { id: "add", value: "+", class: "!bg-gray-400" },
-    { id: "decimal", value: ".", class: "!bg-gray-400" },
-    { id: "zero", value: "0", class: "" },
+    { id: "open-paren", value: "(", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "close-paren", value: ")", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "divide", value: "/", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "seven", value: "7" },
+    { id: "eight", value: "8" },
+    { id: "nine", value: "9" },
+    { id: "multiply", value: "*", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "four", value: "4" },
+    { id: "five", value: "5" },
+    { id: "six", value: "6" },
+    { id: "subtract", value: "-", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "one", value: "1" },
+    { id: "two", value: "2" },
+    { id: "three", value: "3" },
+    { id: "add", value: "+", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "decimal", value: ".", styles: { backgroundColor: "var(--color-neutral-400)" } },
+    { id: "zero", value: "0" },
     {
         id: "equals",
         value: "=",
-        class: "!bg-green-500 col-span-2",
+        styles: { backgroundColor: "var(--color-primary-400)", gridColumn: "span 2" },
         callback: () => emit("evaluate", display.value),
     },
 ];
 </script>
+
+<style scoped>
+.calculator-container {
+    border: var(--spacing-2) solid var(--color-neutral-800);
+    background-color: var(--color-neutral-700);
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-2);
+    padding: var(--spacing-2);
+}
+
+.calculator-display {
+    height: var(--spacing-16);
+    background-color: var(--color-neutral-300);
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: var(--spacing-2);
+
+    font-size: var(--text-3xl);
+    font-weight: semibold;
+
+    grid-column: 1 / -1;
+}
+
+.calculator-button {
+    background-color: var(--color-neutral-300);
+    height: var(--spacing-16);
+    font-size: var(--text-2xl);
+}
+</style>
