@@ -1,10 +1,10 @@
 <template>
-    <main class="grid grid-cols-1 md:grid-cols-2 p-4">
-        <Calculator v-model="display" @evaluate="evaluate" @clear="clear" class="m-4" />
-        <div>
-            <h2 class="text-center text-4xl font-bold">History</h2>
-            <ul>
-                <li v-for="calculation in history" :key="calculation" class="text-center text-lg">
+    <main>
+        <Calculator v-model="display" @evaluate="evaluate" @clear="clear" />
+        <div class="history-container">
+            <h2 class="history-title">History</h2>
+            <ul class="calculation-history-list">
+                <li v-for="calculation in history" :key="calculation" class="calculation-history-list-element">
                     {{ calculation }}
                 </li>
             </ul>
@@ -38,5 +38,44 @@ function clear() {
     display.value = "";
 }
 
-const history = ref<string[]>([]);
+const history = ref<string[]>(["test"]);
 </script>
+
+<style scoped>
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: var(--spacing-4);
+    gap: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.history-container {
+    border: var(--spacing-1) solid var(--color-neutral-900);
+    background-color: var(--color-neutral-400);
+    display: flex;
+    flex-direction: column;
+}
+
+.history-title {
+    text-align: center;
+    font-size: var(--text-4xl);
+    font-weight: bold;
+    margin: var(--spacing-2) auto;
+}
+
+.calculation-history-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin: var(--spacing-4);
+    padding: var(--spacing-1);
+    background-color: var(--color-neutral-300);
+}
+</style>
