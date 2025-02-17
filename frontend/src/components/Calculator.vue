@@ -1,35 +1,38 @@
 <template>
-    <div
-        class="border-2 border-gray-800 bg-gray-700 grid grid-cols-4 gap-2 p-2"
-    >
-        <div
-            id="display"
-            class="h-16 col-span-full bg-gray-300 flex justify-end items-center p-2 text-3xl font-semibold"
-        >
+    <div class="border-2 border-gray-800 bg-gray-700 grid grid-cols-4 gap-2 p-2">
+        <div id="display"
+            class="h-16 col-span-full bg-gray-300 flex justify-end items-center p-2 text-3xl font-semibold">
             {{ display }}
         </div>
-        <button
-            v-for="button in buttons"
-            :key="button.id"
-            :id="button.id"
-            @click="
-                button.callback ? button.callback() : (display += button.value)
-            "
-            :class="`h-16 text-2xl bg-gray-300 ${button.class}`"
-        >
+        <button v-for="button in buttons" :key="button.id" :id="button.id" @click="
+            button.callback ? button.callback() : (display += button.value)
+            " :class="`h-16 text-2xl bg-gray-300 ${button.class}`">
             {{ button.value }}
         </button>
     </div>
 </template>
 
 <script setup lang="ts">
-const display = defineModel<string>({ default: "" });
+import { ref } from "vue";
+
+
+const emit = defineEmits<{
+    clear: [];
+    evaluate: [value: string];
+}>();
+
+function clearCallback() {
+    display.value = "";
+    emit("clear");
+}
+
+const display = ref("");
 const buttons = [
     {
         id: "clear",
         value: "AC",
         class: "!bg-red-500",
-        callback: () => emit("clear"),
+        callback: clearCallback,
     },
     { id: "open-paren", value: "(", class: "!bg-gray-400" },
     { id: "close-paren", value: ")", class: "!bg-gray-400" },
@@ -55,9 +58,4 @@ const buttons = [
         callback: () => emit("evaluate", display.value),
     },
 ];
-
-const emit = defineEmits<{
-    clear: [];
-    evaluate: [value: string];
-}>();
 </script>
