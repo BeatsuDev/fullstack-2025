@@ -39,7 +39,7 @@ function clear() {
     display.value = "";
 }
 
-const history = ref<string[]>(["test"]);
+const history = ref<string[]>([]);
 </script>
 
 <style scoped>
