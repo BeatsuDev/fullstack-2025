@@ -39,14 +39,14 @@
 
 :root {
     --font-size: 14px;
-    --font-size-xs: calc(var(--font-size) * 0.75);
-    --font-size-sm: calc(var(--font-size) * 0.875);
-    --font-size-base: var(--font-size);
-    --font-size-lg: calc(var(--font-size) * 1.125);
-    --font-size-xl: calc(var(--font-size) * 1.25);
-    --font-size-2xl: calc(var(--font-size) * 1.5);
-    --font-size-3xl: calc(var(--font-size) * 1.875);
-    --font-size-4xl: calc(var(--font-size) * 2.25);
+    --text-xs: calc(var(--font-size) * 0.75);
+    --text-sm: calc(var(--font-size) * 0.875);
+    --text-base: var(--font-size);
+    --text-lg: calc(var(--font-size) * 1.125);
+    --text-xl: calc(var(--font-size) * 1.25);
+    --text-2xl: calc(var(--font-size) * 1.5);
+    --text-3xl: calc(var(--font-size) * 1.875);
+    --text-4xl: calc(var(--font-size) * 2.25);
 
     --spacing: 0.25rem;
     --spacing-1: calc(var(--spacing) * 1);
