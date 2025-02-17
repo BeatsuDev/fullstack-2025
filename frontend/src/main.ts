@@ -1,3 +1,4 @@
+import "./assets/variables.css";
 import "./assets/tailwind.css";
 
 import { createApp } from "vue";
