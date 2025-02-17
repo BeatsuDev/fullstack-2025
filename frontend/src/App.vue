@@ -11,10 +11,12 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 
+// as const is a Typescript feature. If you hover over route.text, you'll see that it's of type
+// "Calculator" | "Feedback" because we're telling Typescript that the array will never change.
 const navigationRoutes = [
     { path: "/", text: "Calculator" },
     { path: "/feedback", text: "Feedback" },
-] as const;
+] as const; 
 </script>
 
 <style scoped>
