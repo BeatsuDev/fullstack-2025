@@ -1,6 +1,6 @@
 <template>
     <main>
-        <Calculator v-model="display" @evaluate="evaluate" @clear="clear" />
+        <BasicCalculator v-model="display" @evaluate="evaluate" @clear="clear" />
         <div class="history-container">
             <h2 class="history-title">History</h2>
             <ul class="calculation-history-list">
@@ -13,8 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import Calculator from "@/components/Calculator.vue";
+import BasicCalculator from "@/components/BasicCalculator.vue";
 import { ref } from "vue";
+
 
 const display = ref("");
 
