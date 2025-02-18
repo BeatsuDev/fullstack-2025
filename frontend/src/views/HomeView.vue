@@ -1,6 +1,6 @@
 <template>
     <main>
-        <BasicCalculator v-model="display" @evaluate="evaluate" @clear="clear" />
+        <BasicCalculator v-model="display" @evaluate="evaluate" />
         <div class="history-container">
             <h2 class="history-title">History</h2>
             <ul class="calculation-history-list">
@@ -28,15 +28,10 @@ function evaluate() {
         }
 
         history.value.push(`${display.value} = ${result}`);
-        display.value = result;
+        display.value = result.toString();
     } catch (e) {
         display.value = "Error";
     }
-
-}
-
-function clear() {
-    display.value = "";
 }
 
 const history = ref<string[]>([]);

@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
+const display = defineModel<string>({ default: "" });
 
 const emit = defineEmits<{
     clear: [];
@@ -24,7 +23,6 @@ function clearCallback() {
     emit("clear");
 }
 
-const display = ref("");
 const buttons = [
     {
         id: "clear",
