@@ -72,9 +72,13 @@ function handleSubmitClick() {
 .feedback-view {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    padding-top: var(--spacing-8);
 }
 
 .form-container {
+    background-color: var(--color-neutral-200);
+    border: var(--spacing-1) solid black;
+    padding: var(--spacing-4);
     grid-column: 2 / -2;
 }
 
@@ -98,18 +102,14 @@ function handleSubmitClick() {
 
 .feedback-title {
     text-align: center;
-    font-size: var(--text-2xl);
-    margin-top: var(--spacing-8);
-    margin-bottom: var(--spacing-8);
+    font-size: var(--text-3xl);
+    margin-block: var(--spacing-4);
 }
 
 form {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-4);
-    padding: var(--spacing-16) var(--spacing-4) var(--spacing-32) var(--spacing-4);
-
-    background-color: var(--color-primary-400);
 }
 
 input#name,
