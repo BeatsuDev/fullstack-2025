@@ -1,22 +1,16 @@
 <template>
     <main>
-        <BasicCalculator v-model="display" @evaluate="evaluate" />
-        <div class="history-container">
-            <h2 class="history-title">History</h2>
-            <ul class="calculation-history-list">
-                <li v-for="calculation in history" :key="calculation" class="calculation-history-list-element">
-                    {{ calculation }}
-                </li>
-            </ul>
-        </div>
+        <BasicCalculator class="calculator-component" v-model="display" @evaluate="evaluate" />
+        <CalculationHistoryContainer class="history-component" :history="history" />
     </main>
 </template>
 
 <script setup lang="ts">
 import BasicCalculator from "@/components/BasicCalculator.vue";
+import CalculationHistoryContainer from "@/components/CalculationHistoryContainer.vue";
 import { ref } from "vue";
 
-
+const history = ref<string[]>([]);
 const display = ref("");
 
 function evaluate() {
@@ -33,8 +27,6 @@ function evaluate() {
         display.value = "Error";
     }
 }
-
-const history = ref<string[]>([]);
 </script>
 
 <style scoped>
@@ -43,35 +35,18 @@ main {
     grid-template-columns: 1fr;
     padding: var(--spacing-4);
     gap: var(--spacing-4);
+    height: calc(1000px + var(--spacing-4) * 3);
 }
 
 @media (min-width: 768px) {
     main {
         grid-template-columns: repeat(2, 1fr);
+        height: calc(500px + var(--spacing-4) * 2);
     }
 }
 
-.history-container {
-    border: var(--spacing-1) solid var(--color-neutral-900);
-    background-color: var(--color-neutral-400);
-    display: flex;
-    flex-direction: column;
-}
-
-.history-title {
-    text-align: center;
-    font-size: var(--text-4xl);
-    font-weight: bold;
-    margin: var(--spacing-2) auto;
-}
-
-.calculation-history-list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-2);
-    margin: var(--spacing-4);
-    padding: var(--spacing-1);
-    background-color: var(--color-neutral-300);
+main>div {
+    min-height: 0;
+    height: 100%;
 }
 </style>
