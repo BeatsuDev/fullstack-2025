@@ -8,9 +8,10 @@
 <script setup lang="ts">
 import BasicCalculator from "@/components/BasicCalculator.vue";
 import CalculationHistoryContainer from "@/components/CalculationHistoryContainer.vue";
+import { useCalculationHistory } from "@/stores/calculationHistoryStore";
 import { ref } from "vue";
 
-const history = ref<string[]>([]);
+const { history, addHistory } = useCalculationHistory();
 const display = ref("");
 
 function evaluate() {
@@ -21,7 +22,7 @@ function evaluate() {
             throw new Error("Invalid calculation");
         }
 
-        history.value.push(`${display.value} = ${result}`);
+        addHistory(`${display.value} = ${result}`);
         display.value = result.toString();
     } catch (e) {
         display.value = "Error";
