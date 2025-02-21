@@ -1,5 +1,11 @@
 # Vue Calculator - frontend
 
+Remember to install dependencies before running commands:
+
+```
+npm install
+```
+
 ### Testing
 
 Unit (/component) tests:
