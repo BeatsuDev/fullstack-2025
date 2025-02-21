@@ -116,6 +116,8 @@ input#name,
 textarea#text {
     width: 100%;
     padding: var(--spacing-2);
+    border-bottom: 2px solid var(--color-neutral-700);
+    background-color: var(--color-neutral-50);
 }
 
 button {
