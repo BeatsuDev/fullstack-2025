@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Vue Calculator
+  description: |-
+    Just a simple calculator
+  version: 1.0.0
+  
+servers:
+  - url: localhost:3000
+  
+tags:
+ - name: Calculations
+ - name: Feedback
+  
+paths:
+  /calculate:
+    post:
+      tags:
+        - Calculations
+      description: Calculate an expression and store it to history.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CalculationRequest"
+      responses:
+        "201":
+          description: Successfully calculated the expression and stored to history.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Calculation"
+        "400":
+          description: Could not evaluate the expression
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CalculationError"
+    get:
+      tags:
+        - Calculations
+      responses:
+        "200":
+          description: An array of all previously successfully evaluated expressions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Calculation"
+    delete:
+      tags:
+        - Calculations
+      responses:
+        "200":
+          description: "Deletes all history"
+                  
+  /feedback:
+    post:
+      tags:
+        - Feedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeedbackRequest"
+      responses:
+        "201":
+          description: Successfully created a feedback
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Feedback"
+          
+components:
+  schemas:
+    CalculationRequest:
+      type: object
+      required:
+        - expression
+      properties:
+        expression:
+          type: string
+          examples:
+            - 2+2
+    Calculation:
+      type: object
+      required:
+        - id
+        - expression
+        - result
+      properties:
+        id:
+          type: string
+        expression:
+          type: string
+          examples:
+            - 2+2
+        result:
+          type: number
+          examples:
+            - 4
+    CalculationError:
+      type: object
+      required:
+        - expression
+        - error
+      properties:
+        expression:
+          type: string
+          examples:
+            - "1/0"
+        error:
+          type: string
+          examples:
+            - "Invalid expression"
+    FeedbackRequest:
+      type: object
+      required:
+        - name
+        - feedback
+      properties:
+        name:
+          type: string
+          examples:
+            - "John Doe"
+            - "Jane Doe"
+        feedback:
+          type: string
+          examples:
+            - "This program sucks!"
+            - "I really like this application!"
+    Feedback:
+      type: object
+      required:
+        - id
+        - name
+        - feedback
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          examples:
+            - "John Doe"
+            - "Jane Doe"
+        feedback:
+          type: string
+          examples:
+            - "This program sucks!"
+            - "I really like this application!"
