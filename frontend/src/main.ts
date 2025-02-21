@@ -1,5 +1,5 @@
 import "./assets/variables.css";
-import "./assets/tailwind.css";
+import "./assets/preflight.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
