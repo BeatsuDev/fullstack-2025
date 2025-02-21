@@ -57,9 +57,7 @@ const formattedError = computed<ZodFormattedError<typeof feedback> | null>(() =>
 async function handleSubmitClick() {
     const result = schema.safeParse(feedback);
 
-    if (result.success) {
-        alert("Feedback submitted!" + JSON.stringify(result.data));
-    } else {
+    if (!result.success) {
         showError.value = {
             name: true,
             text: true,
