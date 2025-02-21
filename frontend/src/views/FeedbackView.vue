@@ -5,22 +5,23 @@
             <form @submit.prevent="handleSubmitClick">
                 <div>
                     <label for="name">Name:</label>
-                    <input id="name" v-model="feedback.name" @keydown="showError.name = false" type="text"
+                    <input id="name" cy-name-input v-model="feedback.name" @keydown="showError.name = false" type="text"
                         @blur="showError.name = true" />
-                    <div style="color: red;" v-if="showError.name && formattedError && formattedError.name">
+                    <p cy-name-error style="color: red;" v-if="showError.name && formattedError && formattedError.name">
                         {{ formattedError.name._errors[0] }}
-                    </div>
+                    </p>
                 </div>
                 <div>
                     <label for="text">Feedback:</label>
-                    <textarea id="text" v-model="feedback.text" @keydown="showError.text = false"
+                    <textarea id="text" cy-feedback-input v-model="feedback.text" @keydown="showError.text = false"
                         @blur="showError.text = true"></textarea>
-                    <div style="color: red;" v-if="showError.text && formattedError && formattedError.text">
+                    <p cy-feedback-error style="color: red;"
+                        v-if="showError.text && formattedError && formattedError.text">
                         {{ formattedError.text._errors[0] }}
-                    </div>
+                    </p>
                 </div>
                 <!-- This double bang trick (!!) uses JavaScript's type coercion to turn any variable to a boolean value -->
-                <button type="submit" :disabled="!!formattedError">
+                <button cy-submit-button type="submit" :disabled="!!formattedError">
                     Send feedback
                 </button>
             </form>
@@ -34,7 +35,7 @@ import { z, type ZodFormattedError } from "zod";
 
 const schema = z.object({
     name: z.string().nonempty("Name is required."),
-    text: z.string().min(20),
+    text: z.string().min(20, "Feedback must be at least 20 characters long."),
 });
 
 const feedback = reactive({
@@ -79,7 +80,7 @@ async function handleSubmitClick() {
         });
 
         if (response.ok) {
-            alert("Feedback sent!");
+            alert("Feedback sent! Feedback id: " + (await response.json()).id);
         } else {
             alert("Failed to send feedback.");
         }
