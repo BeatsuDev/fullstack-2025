@@ -54,7 +54,7 @@ const formattedError = computed<ZodFormattedError<typeof feedback> | null>(() =>
 });
 
 // Submitting
-function handleSubmitClick() {
+async function handleSubmitClick() {
     const result = schema.safeParse(feedback);
 
     if (result.success) {
@@ -64,6 +64,31 @@ function handleSubmitClick() {
             name: true,
             text: true,
         };
+        return;
+    }
+
+    try {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + "/feedback", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: feedback.name,
+                feedback: feedback.text,
+            }),
+        });
+
+        if (response.ok) {
+            alert("Feedback sent!");
+        } else {
+            alert("Failed to send feedback.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Network error. Is the backend server running?");
+        return;
     }
 }
 </script>
