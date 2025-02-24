@@ -8,25 +8,33 @@
 <script setup lang="ts">
 import BasicCalculator from "@/components/BasicCalculator.vue";
 import CalculationHistoryContainer from "@/components/CalculationHistoryContainer.vue";
-import { useCalculationHistory } from "@/stores/calculationHistoryStore";
+import { useCalculationStore } from "@/stores/calculationStore";
+import type { Calculation, CalculationError } from "@/types/api";
 import { ref } from "vue";
 
-const { history, addHistory } = useCalculationHistory();
+const { history, addHistory } = useCalculationStore();
 const display = ref("");
 
-function evaluate() {
-    try {
-        const result = eval(display.value);
+async function evaluate() {
+    const calculationEndpoint = import.meta.env.VITE_API_BASE_URL + "/calculate";
+    const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ expression: 2 }),
+    };
 
-        if (result === Infinity || isNaN(result)) {
-            throw new Error("Invalid calculation");
-        }
+    const response = await fetch(calculationEndpoint, requestOptions);
 
-        addHistory(`${display.value} = ${result}`);
-        display.value = result.toString();
-    } catch (e) {
-        display.value = "Error";
+    if (!response.ok) {
+        const data: CalculationError = await response.json();
+        display.value = data.error;
+        return;
     }
+
+    const data: Calculation = await response.json();
+    display.value = data.result.toString();
+
+    addHistory(`${data.expression} = ${data.result}`);
 }
 </script>
 
