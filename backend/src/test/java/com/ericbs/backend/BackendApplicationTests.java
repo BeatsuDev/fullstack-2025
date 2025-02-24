@@ -1,10 +1,10 @@
-package com.ericbs.app;
+package com.ericbs.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Fullstack2025ApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {

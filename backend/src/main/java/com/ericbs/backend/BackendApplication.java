@@ -1,13 +1,13 @@
-package com.ericbs.app;
+package com.ericbs.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Fullstack2025Application {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Fullstack2025Application.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
