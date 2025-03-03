@@ -23,7 +23,13 @@ async function evaluate() {
         body: JSON.stringify({ expression: 2 }),
     };
 
-    const response = await fetch(calculationEndpoint, requestOptions);
+    let response;
+    try {
+        response = await fetch(calculationEndpoint, requestOptions);
+    } catch (error) {
+        display.value = "Network Error";
+        return;
+    }
 
     if (!response.ok) {
         const data: CalculationError = await response.json();
