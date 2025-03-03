@@ -20,7 +20,7 @@ async function evaluate() {
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ expression: 2 }),
+        body: JSON.stringify({ expression: display.value }),
     };
 
     let response;
