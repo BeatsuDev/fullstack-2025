@@ -377,13 +377,13 @@ components:
     LoginRequest:
       type: object
       required:
-        - name
+        - username
         - password
       properties:
         username:
           type: string
           examples:
-            - albert
+            - johndoe
         password:
           type: string
           examples:
@@ -395,12 +395,19 @@ components:
         - username
         - displayName
         - password
-      username:
-        type: string
-      displayName:
-        type: string
-      password:
-        type: string
+      properties:
+        username:
+          type: string
+          examples:
+            - johndoe
+        displayName:
+          type: string
+          examples:
+            - John Doe
+        password:
+          type: string
+          examples:
+            - supersecure123
     User:
       type: object
       description: Represents a logged in user
