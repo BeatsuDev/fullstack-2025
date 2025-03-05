@@ -1,3 +1,3 @@
-package com.ericbs.backend.calculation.dto;
+package com.ericbs.backend.calculation.dtos;
 
 public record CalculationErrorDTO(String expression, String error) {}

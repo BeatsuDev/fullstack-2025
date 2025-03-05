@@ -1,9 +1,9 @@
 package com.ericbs.backend.calculation;
 
-import com.ericbs.backend.calculation.dto.CalculationDTO;
-import com.ericbs.backend.calculation.dto.CalculationErrorDTO;
-import com.ericbs.backend.calculation.dto.CalculationRequestDTO;
-import com.ericbs.backend.calculation.service.CalculationService;
+import com.ericbs.backend.calculation.dtos.CalculationDTO;
+import com.ericbs.backend.calculation.dtos.CalculationErrorDTO;
+import com.ericbs.backend.calculation.dtos.CalculationRequestDTO;
+import com.ericbs.backend.calculation.services.CalculationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
