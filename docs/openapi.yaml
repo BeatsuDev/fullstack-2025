@@ -44,6 +44,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
   /history/{userId}:
     get:
       parameters:
@@ -81,6 +83,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
     delete:
       parameters:
         - in: path
@@ -111,6 +115,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
                   
   /feedback:
     post:
@@ -128,6 +134,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Feedback"
+        "500":
+          description: Uncaught internal server error
   /user:
     description: Register, fetch and delete users
     post:
@@ -151,6 +159,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
     put:
       tags:
         - User
@@ -172,6 +182,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
   /user/{userId}:
     get:
       tags:
@@ -196,6 +208,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
     delete:
       tags:
         - User
@@ -227,6 +241,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
   /user/session:
     description: Login users or get currently logged in user
     post:
@@ -256,6 +272,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
     delete:
       tags:
         - Authentication
@@ -268,6 +286,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
     put:
       tags:
         - Authentication
@@ -280,6 +300,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
     get:
       tags:
         - Authentication
@@ -296,6 +318,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericError"
+        "500":
+          description: Uncaught internal server error
       
 components:
   schemas:
