@@ -54,6 +54,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         delete?: never;
@@ -116,6 +123,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         put?: never;
@@ -165,6 +179,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         options?: never;
@@ -202,6 +223,13 @@ export interface paths {
                     content: {
                         "application/json": components["schemas"]["Feedback"];
                     };
+                };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
                 };
             };
         };
@@ -250,6 +278,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         post: {
@@ -282,6 +317,13 @@ export interface paths {
                     content: {
                         "application/json": components["schemas"]["GenericError"];
                     };
+                };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
                 };
             };
         };
@@ -327,6 +369,13 @@ export interface paths {
                     content: {
                         "application/json": components["schemas"]["GenericError"];
                     };
+                };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
                 };
             };
         };
@@ -378,6 +427,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         options?: never;
@@ -419,6 +475,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         put: {
@@ -445,6 +508,13 @@ export interface paths {
                     content: {
                         "application/json": components["schemas"]["GenericError"];
                     };
+                };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
                 };
             };
         };
@@ -488,6 +558,13 @@ export interface paths {
                         "application/json": components["schemas"]["GenericError"];
                     };
                 };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
             };
         };
         delete: {
@@ -514,6 +591,13 @@ export interface paths {
                     content: {
                         "application/json": components["schemas"]["GenericError"];
                     };
+                };
+                /** @description Uncaught internal server error */
+                500: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
                 };
             };
         };
