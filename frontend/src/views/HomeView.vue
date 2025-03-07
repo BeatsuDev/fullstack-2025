@@ -9,38 +9,60 @@
 import BasicCalculator from "@/components/BasicCalculator.vue";
 import CalculationHistoryContainer from "@/components/CalculationHistoryContainer.vue";
 import { useCalculationStore } from "@/stores/calculationStore";
-import type { Calculation, CalculationError } from "@/types/api";
+import createClient from "openapi-fetch";
+import type { paths as ApiTypes } from "../types/api";
+import type { ResponseCodesFor } from "@/types/helpers";
 import { ref } from "vue";
+
+
 
 const { history, addHistory } = useCalculationStore();
 const display = ref("");
 
-async function evaluate() {
-    const calculationEndpoint = import.meta.env.VITE_API_BASE_URL + "/calculate";
-    const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ expression: display.value }),
-    };
+const ENDPOINT = "/calculate" as const satisfies keyof ApiTypes;
+const client = createClient<ApiTypes>({ baseUrl: import.meta.env.VITE_API_BASE_URL });
 
-    let response;
-    try {
-        response = await fetch(calculationEndpoint, requestOptions);
-    } catch (error) {
-        display.value = "Network Error";
-        return;
+async function evaluate(): Promise<void> {
+    const { data, error, response } = await client.POST(ENDPOINT, {
+        body: { expression: display.value },
+    });
+
+    const code = response.status as ResponseCodesFor<typeof ENDPOINT, "post">;
+
+    // Set calculator display
+    display.value = (() => {
+        switch (code) {
+            case 201:
+                if (!data) throw new Error("Successful response code, but no data returned. This should never happen.");
+                return data.result.toString();
+            case 400:
+                return "Error"
+            case 401:
+                return "Unauthorized"
+            case 500:
+                return "Server Error"
+            default:
+                code satisfies never;
+                return "Unknown error";
+        }
+    })();
+
+    // Handle actions based on response code
+    switch (code) {
+        case 201:
+            if (!data) throw new Error("Successful response code, but no data returned. This should never happen.");
+            return addHistory(`${data.expression} = ${data.result}`);
+        case 400:
+        case 401:
+            if (!error) throw new Error("Received error code, but no error message. This should never happen.");
+            console.error(error.message);
+            return;
+        case 500:
+            return console.error("Unhandled internal server error:", response);
+        default:
+            code satisfies never; // Throws an error if not all cases are handled 
+            throw new Error("Unhandled response code: " + code);
     }
-
-    if (!response.ok) {
-        const data: CalculationError = await response.json();
-        display.value = data.error;
-        return;
-    }
-
-    const data: Calculation = await response.json();
-    display.value = data.result.toString();
-
-    addHistory(`${data.expression} = ${data.result}`);
 }
 </script>
 
