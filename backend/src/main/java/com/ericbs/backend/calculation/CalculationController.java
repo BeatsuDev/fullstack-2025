@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/calculate")
 public class CalculationController {
     private final CalculationService calculationService;
 
@@ -16,7 +15,7 @@ public class CalculationController {
         this.calculationService = calculationService;
     }
 
-    @PostMapping
+    @PostMapping("/calculate")
     public ResponseEntity<Object> calculateExpression(@RequestBody CalculationRequestDTO request) {
         try {
             String expression = request.expression();
