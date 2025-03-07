@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class AuthenticationController {
+public class JwtTokenController {
     @PostMapping("/user/token")
     public ResponseEntity<Object> createSession(@RequestBody LoginRequestDTO loginRequest) {
         return ResponseEntity.status(501).body(new GenericErrorDTO("Not implemented yet."));
