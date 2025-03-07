@@ -4,6 +4,7 @@ import com.ericbs.backend.calculation.dtos.CalculationDTO;
 import com.ericbs.backend.calculation.dtos.CalculationErrorDTO;
 import com.ericbs.backend.calculation.dtos.CalculationRequestDTO;
 import com.ericbs.backend.calculation.services.CalculationService;
+import com.ericbs.backend.common.dtos.GenericError;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,5 +26,15 @@ public class CalculationController {
             CalculationErrorDTO errorResponse = new CalculationErrorDTO(request.expression(), error.getMessage());
             return ResponseEntity.badRequest().body(errorResponse);
         }
+    }
+
+    @GetMapping("/history/{userId}")
+    public ResponseEntity<Object> getHistory(@PathVariable String userId) {
+        return ResponseEntity.status(501).body(new GenericError("Not implemented yet."));
+    }
+
+    @DeleteMapping("/history/{userId}")
+    public ResponseEntity<Object> deleteHistory(@PathVariable String userId) {
+        return ResponseEntity.status(501).body(new GenericError("Not implemented yet."));
     }
 }
