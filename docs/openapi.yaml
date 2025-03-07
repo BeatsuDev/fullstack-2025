@@ -12,7 +12,7 @@ tags:
  - name: Calculations
  - name: Feedback
  - name: User
- - name: Authentication
+ - name: Token
   
 paths:
   /calculate:
@@ -243,11 +243,11 @@ paths:
                 $ref: "#/components/schemas/GenericError"
         "500":
           description: Uncaught internal server error
-  /user/session:
+  /user/token:
     description: Login users or get currently logged in user
     post:
       tags:
-        - Authentication
+        - Token
       requestBody:
         content:
           application/json:
@@ -259,7 +259,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/JwtToken"
         "401":
           description: Could not log user in. Wrong credentials.
           content:
@@ -274,46 +274,19 @@ paths:
                 $ref: "#/components/schemas/GenericError"
         "500":
           description: Uncaught internal server error
-    delete:
+    put:
+      description: Create a new JWT token given a previous valid one.
       tags:
-        - Authentication
+        - Token
       responses:
-        "204":
-          description: Successfully logged the user out
-        "404":
-          description: There is no current logged in session
+        "201":
+          description: Successfully created a new JWT token
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericError"
-        "500":
-          description: Uncaught internal server error
-    put:
-      tags:
-        - Authentication
-      responses:
-        "204":
-          description: Successfully refreshed the login session
+                $ref: "#/components/schemas/JwtToken"
         "404":
           description: There is no current logged in session to refresh
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericError"
-        "500":
-          description: Uncaught internal server error
-    get:
-      tags:
-        - Authentication
-      responses:
-        "200":
-          description: Successfully retrieved the current user that is logged in
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        "404":
-          description: There is no logged in session to retrieve
           content:
             application/json:
               schema:
@@ -452,6 +425,17 @@ components:
           type: string
           examples:
             - John Doe
+    JwtToken:
+      type: object
+      description: The request body for requesting a new token given another valid token
+      required:
+        - userId
+        - jwtToken
+      properties:
+        userId:
+          type: string
+        jwtToken:
+          type: string
     GenericError:
       type: object
       description: A generic error message response

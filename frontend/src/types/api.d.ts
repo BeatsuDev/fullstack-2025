@@ -441,49 +441,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/user/session": {
+    "/user/token": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Successfully retrieved the current user that is logged in */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["User"];
-                    };
-                };
-                /** @description There is no logged in session to retrieve */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericError"];
-                    };
-                };
-                /** @description Uncaught internal server error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        get?: never;
+        /** @description Create a new JWT token given a previous valid one. */
         put: {
             parameters: {
                 query?: never;
@@ -493,12 +459,14 @@ export interface paths {
             };
             requestBody?: never;
             responses: {
-                /** @description Successfully refreshed the login session */
-                204: {
+                /** @description Successfully created a new JWT token */
+                201: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["JwtToken"];
+                    };
                 };
                 /** @description There is no current logged in session to refresh */
                 404: {
@@ -537,7 +505,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["User"];
+                        "application/json": components["schemas"]["JwtToken"];
                     };
                 };
                 /** @description Could not log user in. Wrong credentials. */
@@ -567,40 +535,7 @@ export interface paths {
                 };
             };
         };
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Successfully logged the user out */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description There is no current logged in session */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GenericError"];
-                    };
-                };
-                /** @description Uncaught internal server error */
-                500: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -646,6 +581,11 @@ export interface components {
             id: string;
             username: string;
             displayName: string;
+        };
+        /** @description The request body for requesting a new token given another valid token */
+        JwtToken: {
+            userId: string;
+            jwtToken: string;
         };
         /** @description A generic error message response */
         GenericError: {
