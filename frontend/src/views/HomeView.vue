@@ -15,7 +15,6 @@ import type { ResponseCodesFor } from "@/types/helpers";
 import { ref } from "vue";
 
 
-
 const { history, addHistory } = useCalculationStore();
 const display = ref("");
 
