@@ -259,7 +259,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JwtToken"
+                $ref: "#/components/schemas/TokenData"
         "401":
           description: Could not log user in. Wrong credentials.
           content:
@@ -284,7 +284,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JwtToken"
+                $ref: "#/components/schemas/TokenData"
         "404":
           description: There is no current logged in session to refresh
           content:
@@ -425,7 +425,7 @@ components:
           type: string
           examples:
             - John Doe
-    JwtToken:
+    TokenData:
       type: object
       description: The request body for requesting a new token given another valid token
       required:

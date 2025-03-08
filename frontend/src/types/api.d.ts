@@ -465,7 +465,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["JwtToken"];
+                        "application/json": components["schemas"]["TokenData"];
                     };
                 };
                 /** @description There is no current logged in session to refresh */
@@ -505,7 +505,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["JwtToken"];
+                        "application/json": components["schemas"]["TokenData"];
                     };
                 };
                 /** @description Could not log user in. Wrong credentials. */
@@ -583,7 +583,7 @@ export interface components {
             displayName: string;
         };
         /** @description The request body for requesting a new token given another valid token */
-        JwtToken: {
+        TokenData: {
             userId: string;
             jwtToken: string;
         };
