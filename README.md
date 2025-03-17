@@ -35,6 +35,12 @@ cd frontend
 npm run test:e2e
 ```
 
+End to end tests interact with the webpage as if a user was using it through a browser. In bigger systems 
+you usually have very few tests that are run with a backend running, and then more tests which intercept
+requests to the backend so you don't need to run the backend. Intercepting requests make the tests much faster.
+Since they remove the external dependency of running the backend, they also make sure that errors in the
+frontend are detected even if the backend doesn't work.
+
 ### API documentation with OpenAPI (swagger)
 
 The OpenAPI specification is commonly used in the industry. It's a way to describe endpoints of a REST APIs.
