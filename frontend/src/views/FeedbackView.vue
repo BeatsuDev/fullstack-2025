@@ -1,5 +1,5 @@
 <template>
-    <div class="feedback-view">
+    <main class="feedback-view">
         <div class="form-container">
             <h1 class="feedback-title">Give me some feedback!</h1>
             <form @submit.prevent="handleSubmitClick">
@@ -26,7 +26,7 @@
                 </button>
             </form>
         </div>
-    </div>
+    </main>
 </template>
 
 <script setup lang="ts">
