@@ -15,9 +15,14 @@ const router = createRouter({
             name: "feedback",
             component: () => import("../views/FeedbackView.vue"),
         },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("../views/LoginView.vue"),
+        },
     ],
 });
 
-router.beforeEach(layoutMiddleware);
+router.beforeResolve(layoutMiddleware);
 
 export default router;
