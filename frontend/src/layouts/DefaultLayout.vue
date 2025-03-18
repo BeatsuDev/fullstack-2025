@@ -17,6 +17,7 @@ const navigationRoutes = [
     { path: "/", text: "Calculator" },
     { path: "/feedback", text: "Feedback" },
     { path: "/login", text: "Login" },
+    { path: "/register", text: "Register" },
 ] as const;
 </script>
 
