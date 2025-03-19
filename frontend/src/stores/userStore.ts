@@ -21,10 +21,12 @@ export const useUserStore = defineStore("user", () => {
     }
 
     return {
+        userData,  // I don't really want to export these, but otherwise they won't persist...
+        jwtTokenData,  // See: https://github.com/prazdevs/pinia-plugin-persistedstate/issues/392 
         user,
         jwtToken,
         isAuthenticated,
         login,
         logout,
     };
-});
+}, {persist: true});

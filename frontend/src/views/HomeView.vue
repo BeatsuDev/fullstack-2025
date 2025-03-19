@@ -14,9 +14,11 @@ import createClient from "openapi-fetch";
 import type { paths as ApiTypes } from "../types/api";
 import type { ResponseCodesFor } from "@/types/helpers";
 import { onMounted, ref } from "vue";
+import { storeToRefs } from "pinia";
 
 
-const { history, addHistory, setHistory } = useCalculationStore();
+const { history } = storeToRefs(useCalculationStore());
+const { addHistory, setHistory } = useCalculationStore();
 const display = ref("");
 
 const CALCULATE_ENDPOINT = "/calculate" as const satisfies keyof ApiTypes;
