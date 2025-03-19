@@ -409,10 +409,15 @@ components:
       type: object
       description: Data for creating registering a new user
       required:
+        - id
         - username
         - displayName
-        - password
+        - jwtToken
       properties:
+        id:
+          type: string
+          examples:
+            - abcdefg-1234567
         username:
           type: string
           examples:
@@ -421,10 +426,6 @@ components:
           type: string
           examples:
             - John Doe
-        password:
-          type: string
-          examples:
-            - supersecure123
         jwtToken:
           type: string
     User:

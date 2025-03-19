@@ -578,10 +578,10 @@ export interface components {
         };
         /** @description Data for creating registering a new user */
         NewUserResponse: {
+            id: string;
             username: string;
             displayName: string;
-            password: string;
-            jwtToken?: string;
+            jwtToken: string;
         };
         /** @description Represents a logged in user */
         User: {
