@@ -306,7 +306,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["User"];
+                        "application/json": components["schemas"]["NewUserResponse"];
                     };
                 };
                 /** @description User already exists */
@@ -575,6 +575,13 @@ export interface components {
             username: string;
             displayName: string;
             password: string;
+        };
+        /** @description Data for creating registering a new user */
+        NewUserResponse: {
+            username: string;
+            displayName: string;
+            password: string;
+            jwtToken?: string;
         };
         /** @description Represents a logged in user */
         User: {

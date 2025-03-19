@@ -152,7 +152,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/NewUserResponse"
         "409":
           description: User already exists
           content:
@@ -405,6 +405,28 @@ components:
           type: string
           examples:
             - supersecure123
+    NewUserResponse:
+      type: object
+      description: Data for creating registering a new user
+      required:
+        - username
+        - displayName
+        - password
+      properties:
+        username:
+          type: string
+          examples:
+            - johndoe
+        displayName:
+          type: string
+          examples:
+            - John Doe
+        password:
+          type: string
+          examples:
+            - supersecure123
+        jwtToken:
+          type: string
     User:
       type: object
       description: Represents a logged in user
