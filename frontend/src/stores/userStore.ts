@@ -3,23 +3,25 @@ import { defineStore } from "pinia";
 import type { components } from "@/types/api";
 
 export const useUserStore = defineStore("user", () => {
-    const user = ref<components["schemas"]["User"] | null>(null);
-    const token = ref<string | null>(null);
+    const userData = ref<components["schemas"]["User"] | null>(null);
+    const jwtTokenData = ref<string | null>(null);
     
-    const isAuthenticated = computed(() => !!user.value);
-    const jwtToken = computed(() => token.value);
+    const user = computed(() => userData.value);
+    const jwtToken = computed(() => jwtTokenData.value);
+    const isAuthenticated = computed(() => !!user.value && !!jwtToken.value);
 
     function logout() {
-        user.value = null;
-        token.value = null;
+        userData.value = null;
+        jwtTokenData.value = null;
     }
 
-    function login(userData: components["schemas"]["User"], jwtToken: string) {
-        user.value = userData;
-        token.value = jwtToken;
+    function login(newUserData: components["schemas"]["User"], jwtToken: string) {
+        userData.value = newUserData;
+        jwtTokenData.value = jwtToken;
     }
 
     return {
+        user,
         jwtToken,
         isAuthenticated,
         login,

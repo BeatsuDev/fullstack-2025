@@ -13,9 +13,14 @@ export const useCalculationStore = defineStore("calculation", () => {
         calculationHistory.value = [];
     }
 
+    function setHistory(history: string[]) {
+        calculationHistory.value = history;
+    }
+
     return {
         history,
         addHistory,
         clearHistory,
+        setHistory,
     };
 });
