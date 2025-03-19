@@ -109,7 +109,7 @@ async function register() {
         if (response.ok) {
             const {jwtToken, ...userData} = await response.json() as paths["/user"]["post"]["responses"]["201"]["content"]["application/json"];
             userStore.login(userData, jwtToken);
-            router.push("/");
+            router.push({ name: "home" });
         } else {
             alert("Login failed!");
         }
