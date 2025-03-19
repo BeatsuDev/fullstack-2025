@@ -306,7 +306,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["NewUserResponse"];
+                        "application/json": components["schemas"]["LoginResponse"];
                     };
                 };
                 /** @description User already exists */
@@ -465,7 +465,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["TokenData"];
+                        "application/json": components["schemas"]["LoginResponse"];
                     };
                 };
                 /** @description There is no current logged in session to refresh */
@@ -505,7 +505,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["TokenData"];
+                        "application/json": components["schemas"]["LoginResponse"];
                     };
                 };
                 /** @description Could not log user in. Wrong credentials. */
@@ -577,7 +577,7 @@ export interface components {
             password: string;
         };
         /** @description Data for creating registering a new user */
-        NewUserResponse: {
+        LoginResponse: {
             id: string;
             username: string;
             displayName: string;
@@ -588,11 +588,6 @@ export interface components {
             id: string;
             username: string;
             displayName: string;
-        };
-        /** @description The request body for requesting a new token given another valid token */
-        TokenData: {
-            userId: string;
-            jwtToken: string;
         };
         /** @description A generic error message response */
         GenericError: {

@@ -152,7 +152,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NewUserResponse"
+                $ref: "#/components/schemas/LoginResponse"
         "409":
           description: User already exists
           content:
@@ -259,7 +259,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TokenData"
+                $ref: "#/components/schemas/LoginResponse"
         "401":
           description: Could not log user in. Wrong credentials.
           content:
@@ -284,7 +284,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TokenData"
+                $ref: "#/components/schemas/LoginResponse"
         "404":
           description: There is no current logged in session to refresh
           content:
@@ -405,7 +405,7 @@ components:
           type: string
           examples:
             - supersecure123
-    NewUserResponse:
+    LoginResponse:
       type: object
       description: Data for creating registering a new user
       required:
@@ -448,17 +448,6 @@ components:
           type: string
           examples:
             - John Doe
-    TokenData:
-      type: object
-      description: The request body for requesting a new token given another valid token
-      required:
-        - userId
-        - jwtToken
-      properties:
-        userId:
-          type: string
-        jwtToken:
-          type: string
     GenericError:
       type: object
       description: A generic error message response
