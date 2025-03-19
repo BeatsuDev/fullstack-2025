@@ -32,7 +32,7 @@ import { reactive, computed } from "vue";
 import { z, type ZodFormattedError } from "zod";
 import router from "@/router";
 import { useUserStore } from "@/stores/userStore";
-import type { components, paths } from "@/types/api"
+import type { paths } from "@/types/api"
 
 
 const schema = z.object({
@@ -78,7 +78,7 @@ async function login() {
         if (response.ok) {
             const { jwtToken, ...userData } = await response.json() as paths["/user/token"]["post"]["responses"]["201"]["content"]["application/json"];
             userStore.login(userData, jwtToken);
-            await router.push({ name: "home"});
+            router.push({ name: "home"});
         } else {
             alert("Login failed!");
         }
