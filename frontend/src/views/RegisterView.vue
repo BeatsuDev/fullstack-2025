@@ -51,7 +51,8 @@ import { reactive, computed } from "vue";
 import { z, type ZodFormattedError } from "zod";
 import router from "@/router";
 
-import type { components } from "@/types/api"
+import type { components, paths } from "@/types/api"
+import { useUserStore } from "@/stores/userStore";
 
 
 const schema = z.object({
@@ -82,6 +83,7 @@ const formattedError = computed<ZodFormattedError<typeof formData> | null>(() =>
     return result.error?.format() ?? null;
 });
 
+const userStore = useUserStore();
 async function register() {
     const result = schema.safeParse(formData);
 
@@ -105,7 +107,8 @@ async function register() {
         });
 
         if (response.ok) {
-            console.log(await response.json())
+            const {jwtToken, ...userData} = await response.json() as paths["/user"]["post"]["responses"]["201"]["content"]["application/json"];
+            userStore.login(userData, jwtToken);
             router.push("/");
         } else {
             alert("Login failed!");

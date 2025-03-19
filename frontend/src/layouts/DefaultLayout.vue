@@ -1,9 +1,10 @@
 <template>
     <nav>
-        <RouterLink v-for="(route, index) in navigationRoutes" :key="index" :to="route.path" class="link"
-            active-class="active-link">
-            {{ route.text }}
-        </RouterLink>
+        <RouterLink to="/" class="link" active-class="active-link">Calculator</RouterLink>
+        <RouterLink to="/feedback" class="link" active-class="active-link">Feedback</RouterLink>
+        <RouterLink v-if="!userStore.isAuthenticated" to="/login" class="link" active-class="active-link">Login</RouterLink>
+        <RouterLink v-if="!userStore.isAuthenticated" to="/register" class="link" active-class="active-link">Register</RouterLink>
+        <button v-if="userStore.isAuthenticated" @click="userStore.logout" class="link">Logout</button>
     </nav>
     <main>
         <slot></slot>
@@ -11,14 +12,8 @@
 </template>
 
 <script setup lang="ts">
-// as const is a Typescript feature. If you hover over route.text, you'll see that it's of type
-// "Calculator" | "Feedback" because we're telling Typescript that the array will never change.
-const navigationRoutes = [
-    { path: "/", text: "Calculator" },
-    { path: "/feedback", text: "Feedback" },
-    { path: "/login", text: "Login" },
-    { path: "/register", text: "Register" },
-] as const;
+import { useUserStore } from '@/stores/userStore';
+const userStore = useUserStore();
 </script>
 
 <style scoped>
