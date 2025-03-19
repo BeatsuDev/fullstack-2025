@@ -4,7 +4,7 @@
         <RouterLink to="/feedback" class="link" active-class="active-link">Feedback</RouterLink>
         <RouterLink v-if="!userStore.isAuthenticated" to="/login" class="link" active-class="active-link">Login</RouterLink>
         <RouterLink v-if="!userStore.isAuthenticated" to="/register" class="link" active-class="active-link">Register</RouterLink>
-        <button v-if="userStore.isAuthenticated" @click="userStore.logout" class="link">Logout</button>
+        <button v-if="userStore.isAuthenticated" @click="userStore.logout" class="logout-button">Logout</button>
     </nav>
     <main>
         <slot></slot>
@@ -37,5 +37,14 @@ nav {
 /* The link at which the router is currently at */
 .active-link {
     color: var(--color-primary-500);
+}
+
+.logout-button {
+    transition: color 150ms;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    color: rgba(255, 50, 50);
 }
 </style>
